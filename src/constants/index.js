@@ -1,0 +1,4 @@
+export const REQUEST_GENRES = 'REQUEST_GENRES'
+export const RECEIVE_GENRES = 'RECEIVE_GENRES'
+export const SELECT_SHOW = 'SELECT_SHOW'
+export const FILTER_GENRES = 'FILTER_GENRES'
