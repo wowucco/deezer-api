@@ -9,11 +9,18 @@ class Genre extends Component {
     super(props)
     this.handleUserInput = this.handleUserInput.bind(this)
     this.checkHidedItems = this.checkHidedItems.bind(this)
-    this.onClickRefreshBtn = this.onClickRefreshBtn.bind(this)
   }
+
+  componentDidMount() {
+    if (!this.props.genres.didLoaded) {
+      this.props.dispatch(getGenresLIst())
+    }
+  }
+
   handleUserInput(nextFilterText) {
     this.props.dispatch(filterGenres(nextFilterText))
   }
+
   checkHidedItems(items) {
     let filteredList = [];
     items.map(item => {
@@ -23,20 +30,13 @@ class Genre extends Component {
     })
     return filteredList
   }
-  onClickRefreshBtn(e) {
-    e.preventDefault()
-    this.props.dispatch(getGenresLIst())
-  }
+
   render() {
     const {genres, isFetching} = this.props.genres;
     return (
       <div className='row'>
         <div className='col-md-12'>
           <h3>List of Genres</h3>
-          <a href='#'
-             onClick={this.onClickRefreshBtn}>
-            Refresh
-          </a>
         </div>
         <SearchBar
           onUserInput={this.handleUserInput}

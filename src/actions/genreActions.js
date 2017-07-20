@@ -18,7 +18,7 @@ export function getGenresLIst() {
 function fetchGenres() {
   return dispatch => {
     dispatch(requestGenres());
-    setTimeout(()=>{
+    setTimeout(() => {
       return fetch('http://ws.audioscrobbler.com/2.0/?method=chart.gettoptags&api_key=88a6b7d6efce75b36fc6b2f11bef4267&format=json')
         .then(response => response.json())
         .then(json => dispatch(receiveGenres(json)))
