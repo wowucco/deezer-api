@@ -8,15 +8,20 @@ class Genre extends Component {
   constructor(props) {
     super(props)
     this.handleUserInput = this.handleUserInput.bind(this)
+    this.checkHidedItems = this.checkHidedItems.bind(this)
   }
-
-  /*componentDidMount() {
-   const {dispatch, filterText} = this.props
-   }*/
   handleUserInput(nextFilterText) {
     this.props.dispatch(filterGenres(nextFilterText))
   }
-
+  checkHidedItems(items) {
+    let filteredList = [];
+    items.map(item => {
+      if (!item.hided) {
+        filteredList.push(item)
+      }
+    })
+    return filteredList
+  }
   render() {
     const {genres} = this.props.genres;
     return (
@@ -27,7 +32,7 @@ class Genre extends Component {
         <SearchBar
           onUserInput={this.handleUserInput}
           filterText={this.props.filterText}/>
-        <GenresTiles items={genres}/>
+        <GenresTiles items={this.checkHidedItems(genres)}/>
       </div>
     )
   }

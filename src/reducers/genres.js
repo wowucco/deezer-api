@@ -28,8 +28,15 @@ const initialState = {
 export default function genres(state = initialState, action) {
   switch (action.type) {
     case FILTER_GENRES:
-      return state
+      return {...state, filterText: action.payload, genres: filterGenres(state.genres, action.payload)}
     default:
       return state
   }
+}
+
+function filterGenres(items, filter) {
+  items.forEach(item => {
+    item.hided = (-1 === item.name.indexOf(filter)) ? true : false
+  })
+  return items
 }
