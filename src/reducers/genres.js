@@ -1,27 +1,24 @@
-import {FILTER_GENRES/*, REQUEST_GENRES, RECEIVE_GENRES*/} from '../constants'
+import {FILTER_GENRES, REQUEST_GENRES, RECEIVE_GENRES} from '../constants'
 
 const initialState = {
   genres: [
     {
-      'id': '0',
-      'name': 'Все',
-      'picture': 'https://api.deezer.com/genre/0/image',
-      'picture_small': 'https://e-cdns-images.dzcdn.net/images/misc//56x56-000000-80-0-0.jpg',
-      'picture_medium': 'https://e-cdns-images.dzcdn.net/images/misc//250x250-000000-80-0-0.jpg',
-      'picture_big': 'https://e-cdns-images.dzcdn.net/images/misc//500x500-000000-80-0-0.jpg',
-      'picture_xl': 'https://e-cdns-images.dzcdn.net/images/misc//1000x1000-000000-80-0-0.jpg',
-      'type': 'genre'
+      'name': 'rock',
+      'url': 'https://www.last.fm/tag/rock',
+      'reach': '390955',
+      'taggings': '3900436',
+      'streamable': '1',
+      'wiki': {}
     },
     {
-      'id': '132',
-      'name': 'Поп',
-      'picture': 'https://api.deezer.com/genre/132/image',
-      'picture_small': 'https://e-cdns-images.dzcdn.net/images/misc/db7a604d9e7634a67d45cfc86b48370a/56x56-000000-80-0-0.jpg',
-      'picture_medium': 'https://e-cdns-images.dzcdn.net/images/misc/db7a604d9e7634a67d45cfc86b48370a/250x250-000000-80-0-0.jpg',
-      'picture_big': 'https://e-cdns-images.dzcdn.net/images/misc/db7a604d9e7634a67d45cfc86b48370a/500x500-000000-80-0-0.jpg',
-      'picture_xl': 'https://e-cdns-images.dzcdn.net/images/misc/db7a604d9e7634a67d45cfc86b48370a/1000x1000-000000-80-0-0.jpg',
-      'type': 'genre'
+      'name': 'electronic',
+      'url': 'https://www.last.fm/tag/electronic',
+      'reach': '249401',
+      'taggings': '2305415',
+      'streamable': '1',
+      'wiki': {}
     }],
+  isFetching: false,
   filterText: ''
 }
 
@@ -29,12 +26,30 @@ export default function genres(state = initialState, action) {
   switch (action.type) {
     case FILTER_GENRES:
       return {...state, filterText: action.payload, genres: filterGenres(state.genres, action.payload)}
+    case REQUEST_GENRES:
+      return {...state, isFetching: true}
+    case RECEIVE_GENRES:
+      console.log(action.payload);
+      return {...state, isFetching: false, genres: action.payload.tags.tag}
     default:
       return state
   }
 }
 
-function filterGenres(items, filter) {
+/*function answerFromDeezer(state = {}, action) {
+  switch (action.type) {
+    case RECEIVE_GENRES:
+      return Object.assign({}, state, {
+        isFetching: false,
+        didInvalidate: false,
+        items: action.payload
+      })
+    default:
+      return state
+  }
+}*/
+
+function filterGenres(items, filter = '') {
   items.forEach(item => {
     item.hided = (-1 === item.name.indexOf(filter)) ? true : false
   })
