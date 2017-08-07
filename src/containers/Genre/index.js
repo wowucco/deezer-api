@@ -36,7 +36,7 @@ class Genre extends Component {
     return (
       <div className='row'>
         <div className='col-md-12'>
-          <h3>List of Genres</h3>
+          <h3>Top 50 Genres</h3>
         </div>
         <SearchBar
           onUserInput={this.handleUserInput}

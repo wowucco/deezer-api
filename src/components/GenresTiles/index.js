@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import GenreCard from '../GenreCard/index'
+import GenreCard from '../GenreCard'
 
 class GenresTiles extends Component {
   render() {
