@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import ArtistsTiles from '../../components/ArtistsTiles'
 import {getArtistsList} from '../../actions/artistActions'
 
-class Artist extends Component {
+class Artists extends Component {
 	componentDidMount() {
 		if (!this.props.artists.didLoaded) {
 			this.props.dispatch(getArtistsList())
@@ -27,4 +27,4 @@ function mapStateToProps(state) {
 		artists: state.artists
 	}
 }
-export default connect(mapStateToProps)(Artist)
+export default connect(mapStateToProps)(Artists)

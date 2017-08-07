@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import ArtistCard from '../ArtistCard'
+import ArtistsCard from '../ArtistsCard'
 
 class ArtistsTiles extends Component {
 	render() {
@@ -9,7 +9,7 @@ class ArtistsTiles extends Component {
 				<div className='row'>
 					{items.map(item =>
 						<div className='col-md-3' key={item.name}>
-							<ArtistCard item={item} />
+							<ArtistsCard item={item} />
 						</div>
 					)}
 				</div>

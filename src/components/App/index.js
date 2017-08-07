@@ -8,7 +8,7 @@ class App extends Component {
                 <ul className='nav nav-pills'>
                     <li><NavLink onlyActiveOnIndex={true} to='/'>Home</NavLink></li>
                     <li><NavLink to='/genre'>Top Genres</NavLink></li>
-                    <li><NavLink to='/artist'>Top Artists</NavLink></li>
+                    <li><NavLink to='/artists'>Top Artists</NavLink></li>
                 </ul>
                 {this.props.children}
             </div>
