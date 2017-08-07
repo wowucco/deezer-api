@@ -7,9 +7,9 @@ class ArtistInfo extends Component {
 		const artist = this.props.item
 		return (
 			<div>
-				{/*<img src={artist.image[3]['#text']} />*/}
+				<img src={artist.image[3]['#text']} />
 				{artist.name}
-				{/*{artist.bio.content}*/}
+				{artist.bio.content}
 				{artist.tags.tag.map(item =>
 					<div className='col-md-3' key={item.name}>
 						{item.name}

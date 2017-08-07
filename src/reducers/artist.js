@@ -2,7 +2,7 @@ import {REQUEST_ARTIST, RECEIVE_ARTIST} from '../constants'
 
 const initialState = {
 	artist: [],
-	isFetching: false
+	isFetching: true
 	//didLoaded: false
 }
 
@@ -11,8 +11,7 @@ export default function artists(state = initialState, action) {
 		case REQUEST_ARTIST:
 			return {...state, isFetching: true}
 		case RECEIVE_ARTIST:
-			console.log(action.payload);
-			return {...state, isFetching: false,  artist: action.payload.artist}
+			return {...state, artist: action.payload.artist, isFetching: false}
 		default:
 			return state
 	}
