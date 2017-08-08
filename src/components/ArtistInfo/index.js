@@ -16,12 +16,12 @@ class ArtistInfo extends Component {
 					</div>
 				)}
 				{artist.similar.artist.map(item =>
-					<Link to={this.props.link(item.name)} >
-						<div className='col-md-3' key={item.name}>
+					<div className='col-md-3' key={item.name}>
+						<Link to={'/artists/'+item.name.replace(' ', '_')} >
 							{item.name}
 							<img src={item.image[1]['#text']} />
-						</div>
-					</Link>
+						</Link>
+					</div>
 				)}
 			</div>
 		)
