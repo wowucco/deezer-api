@@ -4,9 +4,10 @@ import {Link} from 'react-router'
 
 class ArtistInfo extends Component {
 	render() {
-		const artist = this.props.item
+		const {artist} = this.props
 		return (
 			<div>
+
 				<img src={artist.image[3]['#text']} />
 				{artist.name}
 				{artist.bio.content}

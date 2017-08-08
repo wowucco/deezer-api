@@ -2,8 +2,9 @@ import {REQUEST_ARTIST, RECEIVE_ARTIST} from '../constants'
 
 const initialState = {
 	artist: [],
-	isFetching: true
-	//didLoaded: false
+	isFetching: true,
+	smallDescription: true,
+	smallImage: false
 }
 
 export default function artists(state = initialState, action) {

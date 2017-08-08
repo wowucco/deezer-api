@@ -16,10 +16,10 @@ class ArtistRelease extends Component {
 	}
 
 	render() {
-		const {artist, isFetching} = this.props.artist;
+		const {artist, isFetching, smallDescription, smallImage} = this.props.artist;
 		return (
 			<div>
-				{(isFetching) ? <h2>Loading...</h2> : <ArtistInfo item={artist}/>}
+				{(isFetching) ? <h2>Loading...</h2> : <ArtistInfo artist={artist} smallDescription={smallDescription} smallImage={smallImage} />}
 			</div>
 		)
 	}
