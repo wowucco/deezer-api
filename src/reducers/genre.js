@@ -5,6 +5,8 @@ import {
 	RECEIVE_GENRE_SIMILAR,
 	REQUEST_GENRE_TOP_ARTISTS,
 	RECEIVE_GENRE_TOP_ARTISTS,
+	REQUEST_GENRE_TOP_ALBUMS,
+	RECEIVE_GENRE_TOP_ALBUMS,
 	HIDE_TOP_SECTION
 } from '../constants'
 
@@ -16,10 +18,16 @@ const initialState = {
 			artist: []
 		}
 	},
+	genreTopAlbums: {
+		albums: {
+			album: []
+		}
+	},
 	isHideTopSection: true,
 	isFetchingInfo: true,
 	isFetchingSimilar: true,
-	isFetchingTopArtists: true
+	isFetchingTopArtists: true,
+	isFetchingTopAlbums: true
 }
 
 export default function genre(state = initialState, action) {
@@ -36,6 +44,10 @@ export default function genre(state = initialState, action) {
 			return {...state, isFetchingTopArtists: true, isHideTopSection: action.payload}
 		case RECEIVE_GENRE_TOP_ARTISTS:
 			return {...state, genreTopArtists: action.payload, isFetchingTopArtists: false}
+		case REQUEST_GENRE_TOP_ALBUMS:
+			return {...state, isFetchingTopAlbums: true, isHideTopSection: action.payload}
+		case RECEIVE_GENRE_TOP_ALBUMS:
+			return {...state, genreTopAlbums: action.payload, isFetchingTopAlbums: false}
 		case HIDE_TOP_SECTION:
 			return {...state, isHideTopSection: action.payload}
 		default:

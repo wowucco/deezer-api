@@ -1,15 +1,21 @@
 import React, {Component} from 'react'
-//import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import GenreInfo from '../../components/GenreInfo'
 import GenreSimilar from '../../components/GenreSimilar'
 import ArtistsTiles from '../../components/ArtistsTiles'
-import {getGenreInfo, getGenreSimilar, getGenreTopArtists, hideTopSection} from '../../actions/genreActions'
+import AlbumsTiles from '../../components/AlbumsTiles'
+import {getGenreInfo, getGenreSimilar, getGenreTopArtists,getGenreTopAlbums, hideTopSection} from '../../actions/genreActions'
+import './style.scss'
 
 class GenreRelease extends Component {
 	constructor(props) {
 		super(props)
-		this.onBtnGenreTopArtist = this.onBtnGenreTopArtist.bind(this)
+		this.state = {
+			topArtistClass: 'hide',
+			topAlbumClass: 'hide'
+		}
+		this.onBtnGenreTopArtists = this.onBtnGenreTopArtists.bind(this)
+		this.onBtnGenreTopAlbums = this.onBtnGenreTopAlbums.bind(this)
 	}
 	componentDidMount() {
 		let genre = this.props.params.release.replace('_', ' ')
@@ -29,35 +35,53 @@ class GenreRelease extends Component {
 		this.props.dispatch(hideTopSection())
 	}
 
-	onBtnGenreTopArtist() {
+	onBtnGenreTopArtists() {
+		this.setState({
+			topArtistClass: 'active',
+			topAlbumClass: 'hide'
+		})
 		let genre = this.props.params.release.replace('_', ' ')
 		this.props.dispatch(getGenreTopArtists(genre))
 	}
 
-	onBtnGenreTop
+	onBtnGenreTopAlbums() {
+		this.setState({
+			topArtistClass: 'hide',
+			topAlbumClass: 'active'
+		})
+		let genre = this.props.params.release.replace('_', ' ')
+		this.props.dispatch(getGenreTopAlbums(genre))
+	}
 
 	render() {
 		const {
 			genreInfo,
 			genreSimilar,
 			genreTopArtists,
+			genreTopAlbums,
 			isHideTopSection,
 			isFetchingInfo,
 			isFetchingSimilar,
-			isFetchingTopArtists
+			isFetchingTopArtists,
+			isFetchingTopAlbums
 		} = this.props.genre
 		return (
 			<div>
 				{isFetchingInfo ? <h2>Loading...</h2> : <GenreInfo info={genreInfo} />}
 				{isFetchingSimilar ? <h2>Loading...</h2> : <GenreSimilar similar={genreSimilar} />}
 
-				<button onClick={this.onBtnGenreTopArtist}>Top Artists</button>
-				<button>Top Albums</button>
+				<button onClick={this.onBtnGenreTopArtists}>Top Artists</button>
+				<button onClick={this.onBtnGenreTopAlbums}>Top Albums</button>
 				<button>Top Tracks</button>
 				{!isHideTopSection
 					?
-						<div className='top-artist'>
-							{isFetchingTopArtists ? <h2>Loading...</h2> : <ArtistsTiles items={genreTopArtists.topartists.artist} />}
+						<div>
+							<div className={this.state.topArtistClass}>
+								{isFetchingTopArtists ? <h2>Loading...</h2> : <ArtistsTiles items={genreTopArtists.topartists.artist} />}
+							</div>
+							<div className={this.state.topAlbumClass}>
+								{isFetchingTopAlbums ? <h2>Loading...</h2> : <AlbumsTiles items={genreTopAlbums.albums.album} />}
+							</div>
 						</div>
 					: <div></div>
 				}

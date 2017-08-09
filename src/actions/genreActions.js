@@ -10,6 +10,8 @@ import {
 	RECEIVE_GENRE_SIMILAR,
 	REQUEST_GENRE_TOP_ARTISTS,
 	RECEIVE_GENRE_TOP_ARTISTS,
+	REQUEST_GENRE_TOP_ALBUMS,
+	RECEIVE_GENRE_TOP_ALBUMS,
 	HIDE_TOP_SECTION
 } from '../constants'
 
@@ -136,6 +138,35 @@ function requestGenreTopArtists() {
 function receiveGenreTopArtists(json) {
 	return {
 		type: RECEIVE_GENRE_TOP_ARTISTS,
+		payload: json
+	}
+}
+
+export function getGenreTopAlbums(genre) {
+	return (dispatch) => {
+		return dispatch(fetchGenreTopAlbums(genre))
+	}
+}
+
+function fetchGenreTopAlbums(genre) {
+	return dispatch => {
+		dispatch(requestGenreTopAlbums());
+		fetch(`http://ws.audioscrobbler.com/2.0/?method=tag.gettopalbums&tag=${genre}&api_key=88a6b7d6efce75b36fc6b2f11bef4267&format=json`)
+			.then(response => response.json())
+			.then(json => dispatch(receiveGenreTopAlbums(json)))
+	}
+}
+
+function requestGenreTopAlbums() {
+	return {
+		type: REQUEST_GENRE_TOP_ALBUMS,
+		payload: false
+	}
+}
+
+function receiveGenreTopAlbums(json) {
+	return {
+		type: RECEIVE_GENRE_TOP_ALBUMS,
 		payload: json
 	}
 }
