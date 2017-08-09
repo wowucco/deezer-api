@@ -5,7 +5,9 @@ import {
 	REQUEST_GENRES,
 	RECEIVE_GENRES,
 	REQUEST_GENRE,
-	RECEIVE_GENRE
+	RECEIVE_GENRE,
+	REQUEST_GENRE_SIMILAR,
+	RECEIVE_GENRE_SIMILAR
 } from '../constants'
 
 export function filterGenres(filter) {
@@ -67,6 +69,34 @@ function requestGenre() {
 function receiveGenre(json) {
 	return {
 		type: RECEIVE_GENRE,
+		payload: json
+	}
+}
+
+export function getGenreSimilar(genre) {
+	return (dispatch) => {
+		return dispatch(fetchGenreSimilar(genre))
+	}
+}
+
+function fetchGenreSimilar(genre) {
+	return dispatch => {
+		dispatch(requestGenreSimilar());
+		fetch(`http://ws.audioscrobbler.com/2.0/?method=tag.getsimilar&tag=${genre}&api_key=88a6b7d6efce75b36fc6b2f11bef4267&format=json`)
+			.then(response => response.json())
+			.then(json => dispatch(receiveGenreSimilar(json)))
+	}
+}
+
+function requestGenreSimilar() {
+	return {
+		type: REQUEST_GENRE_SIMILAR
+	}
+}
+
+function receiveGenreSimilar(json) {
+	return {
+		type: RECEIVE_GENRE_SIMILAR,
 		payload: json
 	}
 }
