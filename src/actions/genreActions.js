@@ -9,8 +9,16 @@ import {
 	REQUEST_GENRE_SIMILAR,
 	RECEIVE_GENRE_SIMILAR,
 	REQUEST_GENRE_TOP_ARTISTS,
-	RECEIVE_GENRE_TOP_ARTISTS
+	RECEIVE_GENRE_TOP_ARTISTS,
+	HIDE_TOP_SECTION
 } from '../constants'
+
+export function hideTopSection() {
+	return {
+		type: HIDE_TOP_SECTION,
+		payload: true
+	}
+}
 
 export function filterGenres(filter) {
 	return {
@@ -120,7 +128,8 @@ function fetchGenreTopArtists(genre) {
 
 function requestGenreTopArtists() {
 	return {
-		type: REQUEST_GENRE_TOP_ARTISTS
+		type: REQUEST_GENRE_TOP_ARTISTS,
+		payload: false
 	}
 }
 

@@ -4,13 +4,19 @@ import {
 	REQUEST_GENRE_SIMILAR,
 	RECEIVE_GENRE_SIMILAR,
 	REQUEST_GENRE_TOP_ARTISTS,
-	RECEIVE_GENRE_TOP_ARTISTS
+	RECEIVE_GENRE_TOP_ARTISTS,
+	HIDE_TOP_SECTION
 } from '../constants'
 
 const initialState = {
 	genreInfo: [],
 	genreSimilar: [],
-	genreTopArtists: [],
+	genreTopArtists: {
+		topartists: {
+			artist: []
+		}
+	},
+	isHideTopSection: true,
 	isFetchingInfo: true,
 	isFetchingSimilar: true,
 	isFetchingTopArtists: true
@@ -27,9 +33,11 @@ export default function genre(state = initialState, action) {
 		case RECEIVE_GENRE_SIMILAR:
 			return {...state, genreSimilar: action.payload, isFetchingSimilar: false}
 		case REQUEST_GENRE_TOP_ARTISTS:
-			return {...state, isFetchingTopArtists: true}
+			return {...state, isFetchingTopArtists: true, isHideTopSection: action.payload}
 		case RECEIVE_GENRE_TOP_ARTISTS:
 			return {...state, genreTopArtists: action.payload, isFetchingTopArtists: false}
+		case HIDE_TOP_SECTION:
+			return {...state, isHideTopSection: action.payload}
 		default:
 			return state
 	}
