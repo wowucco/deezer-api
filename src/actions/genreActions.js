@@ -7,7 +7,9 @@ import {
 	REQUEST_GENRE,
 	RECEIVE_GENRE,
 	REQUEST_GENRE_SIMILAR,
-	RECEIVE_GENRE_SIMILAR
+	RECEIVE_GENRE_SIMILAR,
+	REQUEST_GENRE_TOP_ARTISTS,
+	RECEIVE_GENRE_TOP_ARTISTS
 } from '../constants'
 
 export function filterGenres(filter) {
@@ -97,6 +99,34 @@ function requestGenreSimilar() {
 function receiveGenreSimilar(json) {
 	return {
 		type: RECEIVE_GENRE_SIMILAR,
+		payload: json
+	}
+}
+
+export function getGenreTopArtists(genre) {
+	return (dispatch) => {
+		return dispatch(fetchGenreTopArtists(genre))
+	}
+}
+
+function fetchGenreTopArtists(genre) {
+	return dispatch => {
+		dispatch(requestGenreTopArtists());
+		fetch(`http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag=${genre}&api_key=88a6b7d6efce75b36fc6b2f11bef4267&format=json`)
+			.then(response => response.json())
+			.then(json => dispatch(receiveGenreTopArtists(json)))
+	}
+}
+
+function requestGenreTopArtists() {
+	return {
+		type: REQUEST_GENRE_TOP_ARTISTS
+	}
+}
+
+function receiveGenreTopArtists(json) {
+	return {
+		type: RECEIVE_GENRE_TOP_ARTISTS,
 		payload: json
 	}
 }
