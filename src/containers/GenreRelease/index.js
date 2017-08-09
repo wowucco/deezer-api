@@ -1,19 +1,26 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router'
+//import {Link} from 'react-router'
+import {connect} from 'react-redux'
+import GenreInfo from '../../components/GenreInfo'
+import {getGenreInfo} from '../../actions/genreActions'
 
 class GenreRelease extends Component {
+	componentDidMount() {
+		let genre = this.props.params.release.replace('_', ' ')
+		this.props.dispatch(getGenreInfo(genre))
+	}
 	render() {
-		console.log(this.props)
+		const {genreInfo, isFetching} = this.props.genre
 		return (
 			<div>
-				<Link to='/genre/rock'>
-					<div>
-						{this.props.params.release.replace('_', ' ')}
-					</div>
-				</Link>
+				{isFetching ? <h2>Loading...</h2> : <GenreInfo info={genreInfo}/>}
 			</div>
 		)
 	}
 }
-
-export default GenreRelease
+function mapStateToProps(state) {
+	return {
+		genre: state.genre
+	}
+}
+export default connect(mapStateToProps)(GenreRelease)

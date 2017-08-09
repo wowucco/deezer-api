@@ -4,13 +4,15 @@ import {Link} from 'react-router'
 
 class ArtistInfo extends Component {
 	render() {
-		const {artist} = this.props
+		const {artist, smallDescription, smallImage} = this.props
+		let image = smallImage ? 2 : 3
+		let description = smallDescription ? 'summary' : 'content'
 		return (
 			<div>
-
-				<img src={artist.image[3]['#text']} />
+				<img src={artist.image[image]['#text']} />
 				{artist.name}
-				{artist.bio.content}
+				{artist.bio[description]}
+				<button onClick={this.props.onChangeReadMoreMode}>READ MORE</button>
 				{artist.tags.tag.map(item =>
 					<div className='col-md-3' key={item.name}>
 						{item.name}

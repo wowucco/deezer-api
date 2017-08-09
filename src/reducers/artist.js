@@ -1,4 +1,8 @@
-import {REQUEST_ARTIST, RECEIVE_ARTIST} from '../constants'
+import {
+	REQUEST_ARTIST,
+	RECEIVE_ARTIST,
+	SELECT_READ_MORE_ARTIST
+} from '../constants'
 
 const initialState = {
 	artist: [],
@@ -7,12 +11,14 @@ const initialState = {
 	smallImage: false
 }
 
-export default function artists(state = initialState, action) {
+export default function artist(state = initialState, action) {
 	switch (action.type) {
 		case REQUEST_ARTIST:
 			return {...state, isFetching: true}
 		case RECEIVE_ARTIST:
-			return {...state, artist: action.payload.artist, isFetching: false}
+			return {...state, artist: action.payload.artist, isFetching: false, smallDescription: true, smallImage: false}
+		case SELECT_READ_MORE_ARTIST:
+			return {...state, smallDescription: !state.smallDescription, smallImage: !state.smallImage}
 		default:
 			return state
 	}

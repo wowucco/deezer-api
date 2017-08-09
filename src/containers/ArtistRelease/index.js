@@ -1,9 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import ArtistInfo from '../../components/ArtistInfo'
-import {getArtistInfo} from '../../actions/artistActions'
+import {getArtistInfo, selectReadMoreMode} from '../../actions/artistActions'
 
 class ArtistRelease extends Component {
+	constructor(props) {
+		super(props)
+		this.onChangeReadMoreMode = this.onChangeReadMoreMode.bind(this)
+	}
 	componentDidMount() {
 		let artist = this.props.params.release.replace('_', ' ');
 		this.props.dispatch(getArtistInfo(artist))
@@ -15,11 +19,21 @@ class ArtistRelease extends Component {
 		if (artist !== newArtist) this.props.dispatch(getArtistInfo(newArtist));
 	}
 
+	onChangeReadMoreMode() {
+		this.props.dispatch(selectReadMoreMode())
+	}
+
 	render() {
 		const {artist, isFetching, smallDescription, smallImage} = this.props.artist;
 		return (
 			<div>
-				{(isFetching) ? <h2>Loading...</h2> : <ArtistInfo artist={artist} smallDescription={smallDescription} smallImage={smallImage} />}
+				{(isFetching) ? <h2>Loading...</h2> :
+					<ArtistInfo
+						artist={artist}
+						smallDescription={smallDescription}
+						smallImage={smallImage}
+						onChangeReadMoreMode={this.onChangeReadMoreMode}
+					/>}
 			</div>
 		)
 	}

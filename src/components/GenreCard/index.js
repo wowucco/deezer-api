@@ -5,7 +5,7 @@ import './style.scss'
 class GenreCard extends Component {
   render() {
     const item = this.props.item
-    let linkName = '/genre/'+item.name.replace(' ', '_');
+    let linkName = '/genres/'+item.name.replace(' ', '_');
     return (
       <div>
         <Link to={linkName}>

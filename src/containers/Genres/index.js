@@ -4,7 +4,7 @@ import GenresTiles from '../../components/GenresTiles'
 import SearchBar from '../../components/SearchBar'
 import {filterGenres, getGenresLIst} from '../../actions/genreActions'
 
-class Genre extends Component {
+class Genres extends Component {
   constructor(props) {
     super(props)
     this.handleUserInput = this.handleUserInput.bind(this)
@@ -53,4 +53,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Genre)
+export default connect(mapStateToProps)(Genres)

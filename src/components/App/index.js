@@ -7,7 +7,7 @@ class App extends Component {
             <div className='container'>
                 <ul className='nav nav-pills'>
                     <li><NavLink onlyActiveOnIndex={true} to='/'>Home</NavLink></li>
-                    <li><NavLink to='/genre'>Top Genres</NavLink></li>
+                    <li><NavLink to='/genres'>Top Genres</NavLink></li>
                     <li><NavLink to='/artists'>Top Artists</NavLink></li>
                 </ul>
                 {this.props.children}
