@@ -8,7 +8,7 @@ class GenresTiles extends Component {
       <div className='col-md-12'>
         <div className='row'>
           {items.map(item =>
-            <div className='col-md-3' key={item.name}>
+            <div className='col-md-3' key={item.id}>
               <GenreCard
                 item={item}
               />

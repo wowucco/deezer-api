@@ -14,8 +14,7 @@ export default function genres(state = initialState, action) {
     case REQUEST_GENRES:
       return {...state, isFetching: true}
     case RECEIVE_GENRES:
-      console.log(action.payload);
-      return {...state, isFetching: false, didLoaded: true, genres: action.payload.tags.tag}
+      return {...state, isFetching: false, didLoaded: true, genres: action.payload}
     default:
       return state
   }
