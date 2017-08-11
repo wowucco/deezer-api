@@ -4,8 +4,8 @@ import './style.scss'
 
 class GenreCard extends Component {
 	render() {
-		const {name, picture_medium} = this.props.item
-		let linkName = '/genres/' + name.replace(' ', '_');
+		const {id, name, picture_medium} = this.props.item
+		let linkName = '/genres/' +id;
 		return (
 			<div className='genre-item'>
 				<Link to={linkName}>

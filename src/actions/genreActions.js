@@ -74,9 +74,20 @@ export function getGenreInfo(genre) {
 function fetchGenre(genre) {
 	return dispatch => {
 		dispatch(requestGenre());
-		fetch(`http://ws.audioscrobbler.com/2.0/?method=tag.getinfo&tag=${genre}&api_key=88a6b7d6efce75b36fc6b2f11bef4267&format=json`)
+		fetch('/deezer-api', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				url: `http://api.deezer.com/genre/${genre}`
+			})
+		})
 			.then(response => response.json())
-			.then(json => dispatch(receiveGenre(json)))
+			.then(json => {console.log(json); dispatch(receiveGenre(json))})
+		/*fetch(`http://ws.audioscrobbler.com/2.0/?method=tag.getinfo&tag=${genre}&api_key=88a6b7d6efce75b36fc6b2f11bef4267&format=json`)
+			.then(response => response.json())
+			.then(json => dispatch(receiveGenre(json)))*/
 	}
 }
 

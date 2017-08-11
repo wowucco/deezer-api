@@ -4,7 +4,7 @@ import GenreInfo from '../../components/GenreInfo'
 import GenreSimilar from '../../components/GenreSimilar'
 import ArtistsTiles from '../../components/ArtistsTiles'
 import AlbumsTiles from '../../components/AlbumsTiles'
-import {getGenreInfo, getGenreSimilar, getGenreTopArtists,getGenreTopAlbums, hideTopSection} from '../../actions/genreActions'
+import {getGenreInfo, /*getGenreSimilar,*/ getGenreTopArtists,getGenreTopAlbums, hideTopSection} from '../../actions/genreActions'
 import './style.scss'
 
 class GenreRelease extends Component {
@@ -18,17 +18,17 @@ class GenreRelease extends Component {
 		this.onBtnGenreTopAlbums = this.onBtnGenreTopAlbums.bind(this)
 	}
 	componentDidMount() {
-		let genre = this.props.params.release.replace('_', ' ')
+		let genre = this.props.params.release
 		this.props.dispatch(getGenreInfo(genre))
-		this.props.dispatch(getGenreSimilar(genre))
+		//this.props.dispatch(getGenreSimilar(genre))
 	}
 
 	componentWillReceiveProps(nextProps) {
-		let newGenre = nextProps.params.release.replace('_', ' ')
-		let genre = this.props.params.release.replace('_', ' ')
+		let newGenre = nextProps.params.release
+		let genre = this.props.params.release
 		if (genre !== newGenre) {
 			this.props.dispatch(getGenreInfo(newGenre))
-			this.props.dispatch(getGenreSimilar(newGenre))
+			//this.props.dispatch(getGenreSimilar(newGenre))
 		}
 	}
 	componentWillUnmount() {
