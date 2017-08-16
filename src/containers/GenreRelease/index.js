@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import GenreInfo from '../../components/GenreInfo'
-import GenreSimilar from '../../components/GenreSimilar'
+//import GenreSimilar from '../../components/GenreSimilar'
 import ArtistsTiles from '../../components/ArtistsTiles'
 import AlbumsTiles from '../../components/AlbumsTiles'
 import {getGenreInfo, /*getGenreSimilar,*/ getGenreTopArtists,getGenreTopAlbums, hideTopSection} from '../../actions/genreActions'
@@ -56,19 +56,19 @@ class GenreRelease extends Component {
 	render() {
 		const {
 			genreInfo,
-			genreSimilar,
+			/*genreSimilar,*/
 			genreTopArtists,
 			genreTopAlbums,
 			isHideTopSection,
 			isFetchingInfo,
-			isFetchingSimilar,
+			/*isFetchingSimilar,*/
 			isFetchingTopArtists,
 			isFetchingTopAlbums
 		} = this.props.genre
 		return (
 			<div>
 				{isFetchingInfo ? <h2>Loading...</h2> : <GenreInfo info={genreInfo} />}
-				{isFetchingSimilar ? <h2>Loading...</h2> : <GenreSimilar similar={genreSimilar} />}
+				{/*{isFetchingSimilar ? <h2>Loading...</h2> : <GenreSimilar similar={genreSimilar} />}*/}
 
 				<button onClick={this.onBtnGenreTopArtists}>Top Artists</button>
 				<button onClick={this.onBtnGenreTopAlbums}>Top Albums</button>

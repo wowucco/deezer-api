@@ -32,10 +32,11 @@ const initialState = {
 
 export default function genre(state = initialState, action) {
 	switch (action.type) {
+
 		case REQUEST_GENRE:
 			return {...state, isFetchingInfo: true}
 		case RECEIVE_GENRE:
-			return {...state, genreInfo: action.payload.tag, isFetchingInfo: false}
+			return {...state, genreInfo: action.payload, isFetchingInfo: false}
 		case REQUEST_GENRE_SIMILAR:
 			return {...state, isFetchingSimilar: false}
 		case RECEIVE_GENRE_SIMILAR:
