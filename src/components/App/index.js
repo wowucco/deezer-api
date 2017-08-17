@@ -6,8 +6,15 @@ import NavItem  from 'react-bootstrap/lib/NavItem';
 
 class App extends Component {
 	render() {
+		const divStyle = {
+			width: '100%',
+			height: '100%'/*,
+			backgroundImage: 'url(/common/background-image1.jpg)',
+			backgroundRepeat: 'no-repeat',
+			backgroundSize: '100% 100%'*/
+		}
 		return (
-			<div className='container-fluid'>
+			<div style={divStyle}>
 				<Navbar>
 					<Navbar.Header>
 						<Navbar.Brand>

@@ -47,6 +47,7 @@
     "jquery": "^2.2.1",
     "react": "^15.0.1",
     "react-bootstrap": "^0.31.2",
+    "react-coverflow": "^0.2.3",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.4",
     "react-router": "^2.0.1",
