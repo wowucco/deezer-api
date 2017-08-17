@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {} from 'react-bootstrap'
 
 class GenreInfo extends Component {
 	render() {

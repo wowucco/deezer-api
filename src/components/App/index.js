@@ -1,18 +1,31 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import NavLink from '../NavLink/index'
+import Nav from 'react-bootstrap/lib/Nav';
+import Navbar from 'react-bootstrap/lib/Navbar';
+import NavItem  from 'react-bootstrap/lib/NavItem';
 
 class App extends Component {
-    render() {
-        return (
-            <div className='container'>
-                <ul className='nav nav-pills'>
-                    <li><NavLink onlyActiveOnIndex={true} to='/'>Home</NavLink></li>
-                    <li><NavLink to='/genres'>Top Genres</NavLink></li>
-                    <li><NavLink to='/artists'>Top Artists</NavLink></li>
-                </ul>
-                {this.props.children}
-            </div>
-        )
-    }
+	render() {
+		return (
+			<div className='container-fluid'>
+				<Navbar>
+					<Navbar.Header>
+						<Navbar.Brand>
+							<NavLink to='/'><span>LastFM API</span></NavLink>
+						</Navbar.Brand>
+					</Navbar.Header>
+					<Navbar.Collapse>
+						<Nav className='navbar-right'>
+							<NavItem><NavLink onlyActiveOnIndex={true} to='/'>Home</NavLink></NavItem>
+							<NavItem><NavLink to='/genres'>Top Genres</NavLink></NavItem>
+							<NavItem><NavLink to='/artists'>Top Artists</NavLink></NavItem>
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
+				<div className='container'>{this.props.children}</div>
+			</div>
+
+		)
+	}
 }
 export default App

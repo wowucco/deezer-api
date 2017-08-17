@@ -9,7 +9,7 @@ class GenreCard extends Component {
     return (
       <div>
         <Link to={linkName}>
-          <button type='button' className='btn btn-primary genre-btn'>{item.name}</button>
+          <button type='button' className='btn btn-primary genre-btn'>{item.name.toUpperCase()}</button>
         </Link>
       </div>
     )
