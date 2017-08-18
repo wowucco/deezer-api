@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-//import {Link} from 'react-router'
+import {Link} from 'react-router'
 import ToolTip from 'react-portal-tooltip'
+import {Col} from 'react-bootstrap'
 import './style.scss'
 
 class ArtistsCard extends Component {
@@ -18,8 +19,8 @@ class ArtistsCard extends Component {
 	}
 	render() {
 		const item = this.props.item
-		const id= 'artist-card'+item['@attr'].rank
-		//let linkName = '/artists/'+item.name.replace(' ', '_');
+		const id= 'artist-card'+Math.floor(Math.random() * 1000)+Math.floor(Math.random() * 1000)
+		let link = '/artists/'+item.name.replace(' ', '_');
 		return (
 		<div>
 			<img className='slider-image'
@@ -31,9 +32,18 @@ class ArtistsCard extends Component {
 			/>
 			<div className='coverflow__text__39hqd'>{item.name}</div>
 			<ToolTip active={this.state.isTooltipActive} position='top' arrow='center' parent={`#${id}`}>
-				<div>
-					<p><strong>{item.name}</strong></p>
-					<img src={item.image[3]['#text']}/>
+				<div className='tooltip-container'>
+					<Col sm={6}>
+						<img src={item.image[3]['#text']}/>
+					</Col>
+					<Col sm={6}>
+						<strong>{item.name}</strong>
+						<p>
+							<Link to={link} >
+								Read more
+							</Link>
+						</p>
+					</Col>
 				</div>
 			</ToolTip>
 		</div>

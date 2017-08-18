@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import ArtistsCard from '../ArtistsCard'
 import Coverflow from 'react-coverflow'
-//import AlbumsCard from "../AlbumsCard/index";
-//import {Link} from 'react-router'
 
 class ArtistsTiles extends Component {
 	constructor(props) {

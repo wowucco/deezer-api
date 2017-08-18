@@ -1,21 +1,53 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
+import ToolTip from 'react-portal-tooltip'
+import {Col} from 'react-bootstrap'
+import './style.scss'
 
 class AlbumsCard extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			isTooltipActive: false
+		}
+	}
+	showTooltip() {
+		this.setState({isTooltipActive: true})
+	}
+	hideTooltip() {
+		this.setState({isTooltipActive: false})
+	}
 	render() {
 		const item = this.props.item
-		let linkName = '/albums/'+item.name.replace(' ', '_');
+		const id= 'album-card'+item['@attr'].rank
+		let linkArtist = '/artists/'+item.artist.name.replace(' ', '_');
+		let linkAlbum = '/albums/'+item.name.replace(' ', '_');
 		return (
-			<div className='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
-				<Link to={linkName}>
-					<div className='thumbnail'>
-						<img src={item.image[2]['#text']} alt={item.name} />
-						<div className='caption'>
-							<h3>album: {item.name}</h3>
-							<h4>artist: {item.artist.name}</h4>
-						</div>
+			<div>
+				<img className='slider-image'
+					id={id}
+					src={item.image[2]['#text']}
+					onMouseEnter={this.showTooltip.bind(this)}
+					onMouseLeave={this.hideTooltip.bind(this)}
+				/>
+				<div className='coverflow__text__39hqd'>{item.name}</div>
+				<ToolTip active={this.state.isTooltipActive} position='top' arrow='center' parent={`#${id}`}>
+					<div className='tooltip-container'>
+						<Col sm={6}>
+							<img src={item.image[3]['#text']}/>
+						</Col>
+						<Col sm={6}>
+
+							<p>Artist: <strong><Link to={linkArtist}>{item.artist.name}</Link></strong></p>
+							<p>Album: <strong><Link to={linkAlbum}>{item.name}</Link></strong></p>
+							<p>
+								<Link to={linkAlbum} >
+									Read more
+								</Link>
+							</p>
+						</Col>
 					</div>
-				</Link>
+				</ToolTip>
 			</div>
 		)
 	}

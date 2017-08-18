@@ -26,6 +26,7 @@ class App extends Component {
 							<NavItem><NavLink onlyActiveOnIndex={true} to='/'>Home</NavLink></NavItem>
 							<NavItem><NavLink to='/genres'>Top Genres</NavLink></NavItem>
 							<NavItem><NavLink to='/artists'>Top Artists</NavLink></NavItem>
+							{/*<NavItem><NavLink to='/albums'>Top Albums</NavLink></NavItem>*/}
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>
