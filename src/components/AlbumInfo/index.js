@@ -20,9 +20,11 @@ class ArtistInfo extends Component {
 				)}
 				<ul>
 					{album.tracks.track.map(item =>
-						<div className='col-md-3' key={item.name}>
+						<li>
+							<div className='col-md-3' key={item.name}>
 								{item.name}
-						</div>
+							</div>
+						</li>
 					)}
 				</ul>
 			</div>

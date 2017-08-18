@@ -8,6 +8,7 @@ import ArtistRelease from './containers/ArtistRelease'
 import Artists from './containers/Artists'
 import Albums from './containers/Albums'
 import AlbumRelease from './containers/AlbumRelease'
+import TrackRelease from './containers/TrackRelease'
 import NotFound from './components/NotFound'
 
 const routes = (
@@ -20,6 +21,7 @@ const routes = (
 			<Route path='/artists/:release' component={ArtistRelease}/>
 			<Route path='/albums' component={Albums}/>
 			<Route path='/albums/:release/:release' component={AlbumRelease}/>
+			<Route path='/tracks/:release/:release' component={TrackRelease}/>
 			<Route path='*' component={NotFound}/>
 		</Route>
 

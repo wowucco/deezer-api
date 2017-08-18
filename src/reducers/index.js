@@ -5,6 +5,7 @@ import artists from './artists'
 import artist from './artist'
 import albums from './albums'
 import album from './album'
+import track from './track'
 
 const rootReducer = combineReducers({
 	genres,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   artists,
 	artist,
 	albums,
-	album
+	album,
+	track
 })
 
 export default rootReducer

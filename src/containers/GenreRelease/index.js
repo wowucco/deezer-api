@@ -4,7 +4,15 @@ import GenreInfo from '../../components/GenreInfo'
 import GenreSimilar from '../../components/GenreSimilar'
 import ArtistsTiles from '../../components/ArtistsTiles'
 import AlbumsTiles from '../../components/AlbumsTiles'
-import {getGenreInfo, getGenreSimilar, getGenreTopArtists,getGenreTopAlbums, hideTopSection} from '../../actions/genreActions'
+import TracksTiles from '../../components/TracksTiles'
+import {
+	getGenreInfo,
+	getGenreSimilar,
+	getGenreTopArtists,
+	getGenreTopAlbums,
+	getGenreTopTracks,
+	hideTopSection
+} from '../../actions/genreActions'
 import './style.scss'
 
 class GenreRelease extends Component {
@@ -12,10 +20,12 @@ class GenreRelease extends Component {
 		super(props)
 		this.state = {
 			topArtistClass: 'hide',
-			topAlbumClass: 'hide'
+			topAlbumClass: 'hide',
+			topTracksClass: 'hide'
 		}
 		this.onBtnGenreTopArtists = this.onBtnGenreTopArtists.bind(this)
 		this.onBtnGenreTopAlbums = this.onBtnGenreTopAlbums.bind(this)
+		this.onBtnGenreTopTracks = this.onBtnGenreTopTracks.bind(this)
 	}
 	componentDidMount() {
 		let genre = this.props.params.release.replace('_', ' ')
@@ -38,7 +48,8 @@ class GenreRelease extends Component {
 	onBtnGenreTopArtists() {
 		this.setState({
 			topArtistClass: 'active',
-			topAlbumClass: 'hide'
+			topAlbumClass: 'hide',
+			topTracksClass: 'hide'
 		})
 		let genre = this.props.params.release.replace('_', ' ')
 		this.props.dispatch(getGenreTopArtists(genre))
@@ -47,10 +58,21 @@ class GenreRelease extends Component {
 	onBtnGenreTopAlbums() {
 		this.setState({
 			topArtistClass: 'hide',
-			topAlbumClass: 'active'
+			topAlbumClass: 'active',
+			topTracksClass: 'hide'
 		})
 		let genre = this.props.params.release.replace('_', ' ')
 		this.props.dispatch(getGenreTopAlbums(genre))
+	}
+
+	onBtnGenreTopTracks() {
+		this.setState({
+			topArtistClass: 'hide',
+			topAlbumClass: 'hide',
+			topTracksClass: 'active'
+		})
+		let genre = this.props.params.release.replace('_', ' ')
+		this.props.dispatch(getGenreTopTracks(genre))
 	}
 
 	render() {
@@ -59,12 +81,15 @@ class GenreRelease extends Component {
 			genreSimilar,
 			genreTopArtists,
 			genreTopAlbums,
+			genreTopTracks,
 			isHideTopSection,
 			isFetchingInfo,
 			isFetchingSimilar,
 			isFetchingTopArtists,
-			isFetchingTopAlbums
+			isFetchingTopAlbums,
+			isFetchingTopTracks
 		} = this.props.genre
+		console.log(genreTopTracks)
 		return (
 			<div>
 				{isFetchingInfo ? <h2>Loading...</h2> : <GenreInfo info={genreInfo} />}
@@ -72,7 +97,7 @@ class GenreRelease extends Component {
 
 				<button onClick={this.onBtnGenreTopArtists}>Top Artists</button>
 				<button onClick={this.onBtnGenreTopAlbums}>Top Albums</button>
-				<button>Top Tracks</button>
+				<button onClick={this.onBtnGenreTopTracks}>Top Tracks</button>
 				{!isHideTopSection
 					?
 						<div>
@@ -81,6 +106,9 @@ class GenreRelease extends Component {
 							</div>
 							<div className={this.state.topAlbumClass}>
 								{isFetchingTopAlbums ? <h2>Loading...</h2> : <AlbumsTiles items={genreTopAlbums.albums.album} />}
+							</div>
+							<div className={this.state.topTracksClass}>
+								{isFetchingTopTracks ? <h2>Loading...</h2> : <TracksTiles items={genreTopTracks.tracks} />}
 							</div>
 						</div>
 					: <div></div>

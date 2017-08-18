@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
-//import './style.scss'
+import './style.scss'
 
 class ArtistInfo extends Component {
 	render() {
@@ -9,7 +9,9 @@ class ArtistInfo extends Component {
 		let description = smallDescription ? 'summary' : 'content'
 		return (
 			<div>
-				<img src={artist.image[image]['#text']} />
+				<div className='image-block'>
+					<img src={artist.image[image]['#text']} />
+				</div>
 				{artist.name}
 				{artist.bio[description]}
 				<button onClick={this.props.onChangeReadMoreMode}>READ MORE</button>
