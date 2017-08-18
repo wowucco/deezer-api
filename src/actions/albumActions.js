@@ -37,16 +37,16 @@ function receiveAlbums(json) {
 	}
 }
 
-export function getAlbumInfo(artist) {
+export function getAlbumInfo(artist, album) {
 	return (dispatch) => {
-		return dispatch(fetchAlbum(artist))
+		return dispatch(fetchAlbum(artist, album))
 	}
 }
 
-function fetchAlbum(artist) {
+function fetchAlbum(artist, album) {
 	return dispatch => {
 		dispatch(requestAlbum());
-		fetch(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=88a6b7d6efce75b36fc6b2f11bef4267&format=json`)
+		fetch(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&artist=${artist}&album=${album}&api_key=88a6b7d6efce75b36fc6b2f11bef4267&format=json`)
 			.then(response => response.json())
 			.then(json => dispatch(receiveAlbum(json)))
 	}

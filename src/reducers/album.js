@@ -5,7 +5,7 @@ import {
 } from '../constants'
 
 const initialState = {
-	artist: [],
+	album: [],
 	isFetching: true,
 	smallDescription: true,
 	smallImage: false
@@ -14,14 +14,11 @@ const initialState = {
 export default function artist(state = initialState, action) {
 	switch (action.type) {
 		case REQUEST_ALBUM:
-			return state
-			//return {...state, isFetching: true}
+			return {...state, isFetching: true}
 		case RECEIVE_ALBUM:
-			return state
-			//return {...state, artist: action.payload.artist, isFetching: false, smallDescription: true, smallImage: false}
+			return {...state, album: action.payload.album, isFetching: false, smallDescription: true, smallImage: false}
 		case SELECT_READ_MORE_ALBUM:
-			return state
-			//return {...state, smallDescription: !state.smallDescription, smallImage: !state.smallImage}
+			return {...state, smallDescription: !state.smallDescription, smallImage: !state.smallImage}
 		default:
 			return state
 	}

@@ -19,7 +19,7 @@ const routes = (
 			<Route path='/artists' component={Artists}/>
 			<Route path='/artists/:release' component={ArtistRelease}/>
 			<Route path='/albums' component={Albums}/>
-			<Route path='/albums/:release' component={AlbumRelease}/>
+			<Route path='/albums/:release/:release' component={AlbumRelease}/>
 			<Route path='*' component={NotFound}/>
 		</Route>
 

@@ -20,8 +20,8 @@ class AlbumsCard extends Component {
 	render() {
 		const item = this.props.item
 		const id= 'album-card'+item['@attr'].rank
-		let linkArtist = '/artists/'+item.artist.name.replace(' ', '_');
-		let linkAlbum = '/albums/'+item.name.replace(' ', '_');
+		let linkArtist = `/artists/${item.artist.name.replace(' ', '_')}`;
+		let linkAlbum = `/albums/${item.artist.name.replace(' ', '_')}/${item.name.replace(' ', '_')}`;
 		return (
 			<div>
 				<img className='slider-image'
