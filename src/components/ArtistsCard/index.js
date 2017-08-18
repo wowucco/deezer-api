@@ -1,22 +1,42 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router'
+//import {Link} from 'react-router'
+import ToolTip from 'react-portal-tooltip'
 import './style.scss'
 
 class ArtistsCard extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			isTooltipActive: false
+		}
+	}
+	showTooltip() {
+		this.setState({isTooltipActive: true})
+	}
+	hideTooltip() {
+		this.setState({isTooltipActive: false})
+	}
 	render() {
 		const item = this.props.item
-		let linkName = '/artists/'+item.name.replace(' ', '_');
+		const id= 'artist-card'+item['@attr'].rank
+		//let linkName = '/artists/'+item.name.replace(' ', '_');
 		return (
-			<div className='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
-				<Link to={linkName}>
-					<div className='thumbnail'>
-						<img src={item.image[2]['#text']} alt={item.name} />
-						<div className='caption'>
-							<h3>{item.name}</h3>
-						</div>
-					</div>
-				</Link>
-			</div>
+		<div>
+			<img className='slider-image'
+				id={id}
+				src={item.image[2]['#text']}
+				onMouseEnter={this.showTooltip.bind(this)}
+				onMouseLeave={this.hideTooltip.bind(this)}
+				data-action={`/artists/${item.name.replace(' ', '_')}`}
+			/>
+			<div className='coverflow__text__39hqd'>{item.name}</div>
+			<ToolTip active={this.state.isTooltipActive} position='top' arrow='center' parent={`#${id}`}>
+				<div>
+					<p><strong>{item.name}</strong></p>
+					<img src={item.image[3]['#text']}/>
+				</div>
+			</ToolTip>
+		</div>
 		)
 	}
 }
